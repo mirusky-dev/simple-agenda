@@ -97,7 +97,7 @@ func getByID(gormDB *gorm.DB) fiber.Handler {
 				"error":   err.Error(),
 			})
 		}
-
+		mappers.NormalizeTime(appointment)
 		c.Status(fiber.StatusFound)
 		return c.JSON(appointment)
 	}
@@ -114,9 +114,10 @@ func getAll(gormDB *gorm.DB) fiber.Handler {
 
 		db = db.Limit(pager.Limit)
 		db = db.Offset(pager.Offset)
+		db = db.Order("id ASC")
 
-		var appointment = new([]dtos.Appointment)
-		err := db.Model(&entities.Appointment{}).Find(appointment).Error
+		var appointments = new([]dtos.Appointment)
+		err := db.Model(&entities.Appointment{}).Find(appointments).Error
 		if err != nil {
 			c.Status(fiber.StatusInternalServerError)
 			return c.JSON(fiber.Map{
@@ -125,8 +126,14 @@ func getAll(gormDB *gorm.DB) fiber.Handler {
 			})
 		}
 
+		var normalizedAppointments []dtos.Appointment
+		for _, appointment := range *appointments {
+			mappers.NormalizeTime(&appointment)
+			normalizedAppointments = append(normalizedAppointments, appointment)
+		}
+
 		return c.JSON(fiber.Map{
-			"result": appointment,
+			"result": normalizedAppointments,
 			"_metadata": fiber.Map{
 				"previous": pager.Previous(),
 				"this":     pager.Page,

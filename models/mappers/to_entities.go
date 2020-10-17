@@ -42,3 +42,17 @@ func AppointmentDtoToEntity(dto *dtos.Appointment) (*entities.Appointment, error
 
 	return ent, nil
 }
+
+func NormalizeTime(dto *dtos.Appointment) {
+	if dto.Hour != nil {
+		hour, _ := time.Parse("15:04:05", *dto.Hour)
+		hourStr := hour.Format("15:06")
+		dto.Hour = &hourStr
+	}
+
+	if dto.Date != "" {
+		date, _ := time.Parse(time.RFC3339, dto.Date)
+		dto.Date = date.Format("02/01/2006")
+	}
+
+}
