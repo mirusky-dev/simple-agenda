@@ -10,9 +10,7 @@
             "request": "launch",
             "mode": "auto",
             "program": "${workspaceFolder}/main.go",
-            "env": {
-                "CONNECTIONSTRING":"user=postgres password=postgres dbname=postgres port=5432 sslmode=disable"
-            },
+            "env": {},
             "args": []
         }
     ]
