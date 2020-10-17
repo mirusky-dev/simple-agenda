@@ -5,11 +5,12 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/mirusky-dev/agenda-simple/database"
-	"github.com/mirusky-dev/agenda-simple/models/dtos"
-	"github.com/mirusky-dev/agenda-simple/models/entities"
-	"github.com/mirusky-dev/agenda-simple/models/mappers"
 	"gorm.io/gorm"
+
+	"github.com/mirusky-dev/simple-agenda/database"
+	"github.com/mirusky-dev/simple-agenda/models/dtos"
+	"github.com/mirusky-dev/simple-agenda/models/entities"
+	"github.com/mirusky-dev/simple-agenda/models/mappers"
 )
 
 // AppointmentRouter setup routes for /appointments

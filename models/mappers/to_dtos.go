@@ -1,8 +1,8 @@
 package mappers
 
 import (
-	"github.com/mirusky-dev/agenda-simple/models/dtos"
-	"github.com/mirusky-dev/agenda-simple/models/entities"
+	"github.com/mirusky-dev/simple-agenda/models/dtos"
+	"github.com/mirusky-dev/simple-agenda/models/entities"
 )
 
 // AppointmentEntityToDto convert a entity to dto

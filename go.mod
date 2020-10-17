@@ -1,4 +1,4 @@
-module github.com/mirusky-dev/agenda-simple
+module github.com/mirusky-dev/simple-agenda
 
 go 1.15
 

@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	"github.com/mirusky-dev/agenda-simple/models/dtos"
-	"github.com/mirusky-dev/agenda-simple/models/entities"
+	"github.com/mirusky-dev/simple-agenda/models/dtos"
+	"github.com/mirusky-dev/simple-agenda/models/entities"
 )
 
 // AppointmentDtoToEntity convert a dto to entity

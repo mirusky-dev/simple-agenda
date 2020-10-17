@@ -9,8 +9,8 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/joho/godotenv"
 
-	"github.com/mirusky-dev/agenda-simple/database"
-	"github.com/mirusky-dev/agenda-simple/handlers"
+	"github.com/mirusky-dev/simple-agenda/database"
+	"github.com/mirusky-dev/simple-agenda/handlers"
 )
 
 func main() {
