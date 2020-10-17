@@ -7,7 +7,7 @@ import (
 	"gorm.io/gorm"
 )
 
-// Appointment ...
+// Appointment represent an entity in database
 type Appointment struct {
 	gorm.Model
 

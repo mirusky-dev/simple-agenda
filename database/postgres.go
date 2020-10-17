@@ -5,13 +5,13 @@ import (
 	"gorm.io/gorm"
 )
 
-// New ...
+// New create a new connection based on connection string
 func New(connStr string) (*gorm.DB, error) {
 	db, err := gorm.Open(postgres.Open(connStr), &gorm.Config{})
 	return db, err
 }
 
-// Clone ...
+// Clone create a new connection based on existing one
 func Clone(gormDB *gorm.DB) (*gorm.DB, error) {
 	sqlConn, err := gormDB.DB()
 	if err != nil {

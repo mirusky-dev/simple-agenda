@@ -4,7 +4,7 @@ const (
 	pass = 10
 )
 
-// Pager ...
+// Pager is a simple pagination helper
 type Pager struct {
 	Limit  int
 	Offset int
