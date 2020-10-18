@@ -38,5 +38,9 @@ func main() {
 	api := app.Group("/api")
 	handlers.AppointmentRouter(api, db)
 
-	app.Listen(":3000")
+	if port := os.Getenv("PORT"); port != "" {
+		app.Listen(":" + port)
+	} else {
+		app.Listen(":3030")
+	}
 }
