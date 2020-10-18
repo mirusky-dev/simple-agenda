@@ -6,9 +6,10 @@ const (
 
 // Pager is a simple pagination helper
 type Pager struct {
-	Limit  int
-	Offset int
-	Page   int
+	Limit   int
+	Offset  int
+	Page    int
+	NoLimit bool
 }
 
 // Check make limit an offset auto

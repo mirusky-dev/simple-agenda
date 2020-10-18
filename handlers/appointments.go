@@ -113,8 +113,10 @@ func getAll(gormDB *gorm.DB) fiber.Handler {
 		c.QueryParser(pager)
 		pager.Check()
 
-		db = db.Limit(pager.Limit)
-		db = db.Offset(pager.Offset)
+		if !pager.NoLimit {
+			db = db.Limit(pager.Limit)
+			db = db.Offset(pager.Offset)
+		}
 		db = db.Order("id ASC")
 
 		var appointments = new([]dtos.Appointment)
@@ -131,6 +133,15 @@ func getAll(gormDB *gorm.DB) fiber.Handler {
 		for _, appointment := range *appointments {
 			mappers.NormalizeTime(&appointment)
 			normalizedAppointments = append(normalizedAppointments, appointment)
+		}
+
+		if pager.NoLimit {
+			return c.JSON(fiber.Map{
+				"result": normalizedAppointments,
+				"_metadata": fiber.Map{
+					"limit": -1,
+				},
+			})
 		}
 
 		return c.JSON(fiber.Map{
