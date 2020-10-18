@@ -46,7 +46,7 @@ func AppointmentDtoToEntity(dto *dtos.Appointment) (*entities.Appointment, error
 func NormalizeTime(dto *dtos.Appointment) {
 	if dto.Hour != nil {
 		hour, _ := time.Parse("15:04:05", *dto.Hour)
-		hourStr := hour.Format("15:06")
+		hourStr := hour.Format("15:04")
 		dto.Hour = &hourStr
 	}
 

@@ -15,7 +15,7 @@ func AppointmentEntityToDto(ent *entities.Appointment) (*dtos.Appointment, error
 	}
 
 	if ent.Hour.Valid {
-		hour := ent.Hour.Time.Format("15:06")
+		hour := ent.Hour.Time.Format("15:04")
 		dto.Hour = &hour
 	}
 
