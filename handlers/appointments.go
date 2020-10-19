@@ -23,9 +23,9 @@ func AppointmentRouter(app fiber.Router, gormDB *gorm.DB) {
 
 // post handles Create operation
 func post(gormDB *gorm.DB) fiber.Handler {
-	db := gormDB.New()
-
 	return func(c *fiber.Ctx) error {
+		db := gormDB.New()
+
 		var appointment = new(dtos.Appointment)
 		err := c.BodyParser(&appointment)
 		if err != nil {
@@ -67,9 +67,9 @@ func post(gormDB *gorm.DB) fiber.Handler {
 
 // getByID handles Read operation by ID
 func getByID(gormDB *gorm.DB) fiber.Handler {
-	db := gormDB.New()
-
 	return func(c *fiber.Ctx) error {
+		db := gormDB.New()
+
 		idStr := c.Params("id")
 		id, err := strconv.ParseInt(idStr, 10, 64)
 		if err != nil {
@@ -105,9 +105,9 @@ func getByID(gormDB *gorm.DB) fiber.Handler {
 
 // getAll handles Read paginated operation
 func getAll(gormDB *gorm.DB) fiber.Handler {
-	db := gormDB.New()
-
 	return func(c *fiber.Ctx) error {
+		db := gormDB.New()
+
 		var pager = new(dtos.Pager)
 		c.QueryParser(pager)
 		pager.Check()
@@ -115,11 +115,11 @@ func getAll(gormDB *gorm.DB) fiber.Handler {
 		if !pager.NoLimit {
 			db = db.Limit(pager.Limit)
 			db = db.Offset(pager.Offset)
+			db = db.Order("id ASC")
 		}
-		db = db.Order("id ASC")
 
 		var appointments = new([]dtos.Appointment)
-		err := db.Model(&entities.Appointment{}).Find(appointments).Error
+		err := db.Find(&appointments).Error
 		if err != nil {
 			c.Status(fiber.StatusInternalServerError)
 			return c.JSON(fiber.Map{
@@ -158,9 +158,8 @@ func getAll(gormDB *gorm.DB) fiber.Handler {
 
 // put handles Update operation by ID
 func put(gormDB *gorm.DB) fiber.Handler {
-	db := gormDB.New()
-
 	return func(c *fiber.Ctx) error {
+		db := gormDB.New()
 
 		idStr := c.Params("id")
 		id, err := strconv.ParseInt(idStr, 10, 64)
@@ -213,9 +212,8 @@ func put(gormDB *gorm.DB) fiber.Handler {
 
 // delete handles Delete operation by ID
 func delete(gormDB *gorm.DB) fiber.Handler {
-	db := gormDB.New()
-
 	return func(c *fiber.Ctx) error {
+		db := gormDB.New()
 
 		idStr := c.Params("id")
 		id, err := strconv.ParseInt(idStr, 10, 64)
