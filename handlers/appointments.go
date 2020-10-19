@@ -5,9 +5,8 @@ import (
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 
-	"github.com/mirusky-dev/simple-agenda/database"
 	"github.com/mirusky-dev/simple-agenda/models/dtos"
 	"github.com/mirusky-dev/simple-agenda/models/entities"
 	"github.com/mirusky-dev/simple-agenda/models/mappers"
@@ -24,7 +23,7 @@ func AppointmentRouter(app fiber.Router, gormDB *gorm.DB) {
 
 // post handles Create operation
 func post(gormDB *gorm.DB) fiber.Handler {
-	db, _ := database.Clone(gormDB)
+	db := gormDB.New()
 
 	return func(c *fiber.Ctx) error {
 		var appointment = new(dtos.Appointment)
@@ -68,7 +67,7 @@ func post(gormDB *gorm.DB) fiber.Handler {
 
 // getByID handles Read operation by ID
 func getByID(gormDB *gorm.DB) fiber.Handler {
-	db, _ := database.Clone(gormDB)
+	db := gormDB.New()
 
 	return func(c *fiber.Ctx) error {
 		idStr := c.Params("id")
@@ -106,7 +105,7 @@ func getByID(gormDB *gorm.DB) fiber.Handler {
 
 // getAll handles Read paginated operation
 func getAll(gormDB *gorm.DB) fiber.Handler {
-	db, _ := database.Clone(gormDB)
+	db := gormDB.New()
 
 	return func(c *fiber.Ctx) error {
 		var pager = new(dtos.Pager)
@@ -159,7 +158,7 @@ func getAll(gormDB *gorm.DB) fiber.Handler {
 
 // put handles Update operation by ID
 func put(gormDB *gorm.DB) fiber.Handler {
-	db, _ := database.Clone(gormDB)
+	db := gormDB.New()
 
 	return func(c *fiber.Ctx) error {
 
@@ -214,7 +213,7 @@ func put(gormDB *gorm.DB) fiber.Handler {
 
 // delete handles Delete operation by ID
 func delete(gormDB *gorm.DB) fiber.Handler {
-	db, _ := database.Clone(gormDB)
+	db := gormDB.New()
 
 	return func(c *fiber.Ctx) error {
 

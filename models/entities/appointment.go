@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"time"
 
-	"gorm.io/gorm"
+	"github.com/jinzhu/gorm"
 )
 
 // Appointment represent an entity in database
