@@ -13,7 +13,7 @@ import (
 func AppointmentDtoToEntity(dto *dtos.Appointment) (*entities.Appointment, error) {
 	ent := new(entities.Appointment)
 	if dto.Hour != nil {
-		if hour, err := time.Parse("15:06", *dto.Hour); err == nil {
+		if hour, err := time.Parse("15:04", *dto.Hour); err == nil {
 			ent.Hour = sql.NullTime{
 				Time:  hour,
 				Valid: true,
@@ -45,7 +45,7 @@ func AppointmentDtoToEntity(dto *dtos.Appointment) (*entities.Appointment, error
 
 func NormalizeTime(dto *dtos.Appointment) {
 	if dto.Hour != nil {
-		hour, _ := time.Parse("15:04:05", *dto.Hour)
+		hour, _ := time.Parse(time.RFC3339, *dto.Hour)
 		hourStr := hour.Format("15:04")
 		dto.Hour = &hourStr
 	}
